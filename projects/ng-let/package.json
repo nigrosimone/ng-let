@@ -1,6 +1,6 @@
 {
   "name": "ng-let",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Component property connection in Angular application.",
   "repository": {
     "type": "git",
