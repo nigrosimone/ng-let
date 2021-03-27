@@ -1,0 +1,25 @@
+{
+  "name": "ng-let",
+  "version": "1.0.3",
+  "description": "Component property connection in Angular application.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nigrosimone/ng-let.git"
+  },
+  "keywords": [
+    "angular"
+  ],
+  "author": "Simone Nigro <nigro.simone@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nigrosimone/ng-let/issues"
+  },
+  "homepage": "https://github.com/nigrosimone/ng-let",
+  "peerDependencies": {
+    "@angular/common": "^10.0.6",
+    "@angular/core": "^10.0.6"
+  },
+  "dependencies": {
+    "tslib": "^2.0.0"
+  }
+}

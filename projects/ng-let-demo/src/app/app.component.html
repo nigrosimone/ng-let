@@ -1,0 +1,28 @@
+<h1>Observable</h1>
+<ng-container *ngLet="obs$ | async as data">
+    <div>
+      1: {{data}}
+    </div>
+    <div>
+      2: {{data}}
+    </div>
+</ng-container>
+<h1>ngModel</h1>
+<input type="text" [(ngModel)]="model"/>
+<ng-container *ngLet="model as data">
+    <div>
+      1: {{data}}
+    </div>
+    <div>
+      2: {{data}}
+    </div>
+</ng-container>
+<h1>Computed</h1>
+<ng-container *ngLet="model === 'test' as data">
+    <div>
+      1: {{data}}
+    </div>
+    <div>
+      2: {{data}}
+    </div>
+</ng-container>
