@@ -1,7 +1,7 @@
 {
   "name": "ng-let",
   "version": "1.0.6",
-  "description": "Component property connection in Angular application.",
+  "description": "Structural directive for sharing data as local variable into html component template.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nigrosimone/ng-let.git"
