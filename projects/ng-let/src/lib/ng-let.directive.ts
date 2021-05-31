@@ -5,17 +5,18 @@ interface NgLetContext<T> {
 }
 
 @Directive({
+    // tslint:disable-next-line: directive-selector
     selector: '[ngLet]'
 })
 export class NgLetDirective<T> {
-    private _context: NgLetContext<T> = { ngLet: null };
+    private context: NgLetContext<T> = { ngLet: null };
 
-    constructor(_viewContainer: ViewContainerRef, _templateRef: TemplateRef<NgLetContext<T>>) {
-        _viewContainer.createEmbeddedView(_templateRef, this._context);
+    constructor(viewContainer: ViewContainerRef, templateRef: TemplateRef<NgLetContext<T>>) {
+        viewContainer.createEmbeddedView(templateRef, this.context);
     }
 
     @Input()
     set ngLet(value: T) {
-        this._context.ngLet = value;
+        this.context.ngLet = value;
     }
 }

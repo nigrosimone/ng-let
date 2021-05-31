@@ -1,12 +1,11 @@
 import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NgLetModule } from './ng-let.module';
-
-
-@Component({template: '<div *ngLet="value as data">{{data}}</div>'})
+@Component({ template: '<div *ngLet="value as data">{{data}}</div>' })
 class TestComponent {
     value = 'test';
 }
+
 describe('NgLet', () => {
 
     let fixture: ComponentFixture<TestComponent>;
@@ -15,8 +14,8 @@ describe('NgLet', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-          declarations: [ TestComponent],
-          imports: [NgLetModule]
+            declarations: [TestComponent],
+            imports: [NgLetModule]
         });
         fixture = TestBed.createComponent(TestComponent);
         debugElement = fixture.debugElement;

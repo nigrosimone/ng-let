@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
-import { NgLetModule } from '../../../ng-let/src/public-api';
+import { NgLetModule } from 'ng-let';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,4 +17,4 @@ import { NgLetModule } from '../../../ng-let/src/public-api';
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
