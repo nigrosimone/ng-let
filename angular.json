@@ -62,7 +62,6 @@
             "main": "projects/ng-let-demo/src/main.ts",
             "polyfills": "projects/ng-let-demo/src/polyfills.ts",
             "tsConfig": "projects/ng-let-demo/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/ng-let-demo/src/favicon.ico",
               "projects/ng-let-demo/src/assets"
@@ -70,7 +69,13 @@
             "styles": [
               "projects/ng-let-demo/src/styles.sass"
             ],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
