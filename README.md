@@ -101,7 +101,7 @@ export class AppComponent {
 
 ## Support
 
-This is an open-source project. Star this [repository](https://github.com/nigrosimone/ng-let), if you like it, or even [donate](https://www.paypal.com/paypalme/snwp). Thank you so much!
+This is an open-source project. Star this [repository](https://github.com/nigrosimone/ng-let), if you like it, or even [donate](https://www.paypal.com/paypalme/snwp). Thank you so much! 
 
 ## My other libraries
 
