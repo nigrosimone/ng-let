@@ -1,4 +1,4 @@
-# NgLet [![Build Status](https://travis-ci.com/nigrosimone/ng-let.svg?branch=main)](https://travis-ci.com/nigrosimone/ng-let) [![Coverage Status](https://coveralls.io/repos/github/nigrosimone/ng-let/badge.svg?branch=main)](https://coveralls.io/github/nigrosimone/ng-let?branch=main) [![NPM version](https://img.shields.io/npm/v/ng-let.svg)](https://www.npmjs.com/package/ng-let)
+# NgLet [![Build Status](https://app.travis-ci.com/nigrosimone/ng-let.svg?branch=main)](https://app.travis-ci.com/nigrosimone/ng-let) [![Coverage Status](https://coveralls.io/repos/github/nigrosimone/ng-let/badge.svg?branch=main)](https://coveralls.io/github/nigrosimone/ng-let?branch=main) [![NPM version](https://img.shields.io/npm/v/ng-let.svg)](https://www.npmjs.com/package/ng-let)
 
 Structural directive for sharing data as local variable into html component template.
 
