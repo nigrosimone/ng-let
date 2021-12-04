@@ -29,18 +29,10 @@
             "karmaConfig": "projects/ng-let/karma.conf.js"
           }
         },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/ng-let/tsconfig.lib.json",
-              "projects/ng-let/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
+		"lint": {
+			"builder": "@angular-eslint/builder:lint",
+			"options": {}
+		}
       }
     },
     "ng-let-demo": {
@@ -88,7 +80,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -142,19 +133,6 @@
             "scripts": []
           }
         },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/ng-let-demo/tsconfig.app.json",
-              "projects/ng-let-demo/tsconfig.spec.json",
-              "projects/ng-let-demo/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        },
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
@@ -166,7 +144,11 @@
               "devServerTarget": "ng-let-demo:serve:production"
             }
           }
-        }
+        },
+		"lint": {
+			"builder": "@angular-eslint/builder:lint",
+			"options": {}
+		}
       }
     }},
   "defaultProject": "ng-let"
