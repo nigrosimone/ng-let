@@ -2,6 +2,7 @@ import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 
 interface NgLetContext<T> {
     ngLet: T;
+    $implicit: T;
 }
 
 @Directive({
@@ -9,14 +10,19 @@ interface NgLetContext<T> {
     selector: '[ngLet]'
 })
 export class NgLetDirective<T> {
-    private context: NgLetContext<T | null> = { ngLet: null };
+    
+    private context: NgLetContext<T | null> = { ngLet: null, $implicit: null };
+    private hasView: boolean = false;
 
-    constructor(viewContainer: ViewContainerRef, templateRef: TemplateRef<NgLetContext<T>>) {
-        viewContainer.createEmbeddedView(templateRef, this.context);
-    }
+    // eslint-disable-next-line no-unused-vars
+    constructor(private viewContainer: ViewContainerRef, private templateRef: TemplateRef<NgLetContext<T>>) {}
 
     @Input()
     set ngLet(value: T) {
-        this.context.ngLet = value;
+        this.context.$implicit = this.context.ngLet = value;
+        if (!this.hasView) {
+            this.viewContainer.createEmbeddedView(this.templateRef, this.context);
+            this.hasView = true;
+        }
     }
 }

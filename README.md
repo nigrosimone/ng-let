@@ -69,6 +69,30 @@ export class AppComponent {
 }
 ```
 
+or with the alternative sintax:
+
+```ts
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  template: `
+  <ng-container *ngLet="(num1 + num2); let total"> <!-- single computation -->
+    <div>
+      1: {{ total }} <!-- 3 -->
+    </div>
+    <div>
+      2: {{ total }} <!-- 3 -->
+    </div>
+  </ng-container> 
+  `,
+})
+export class AppComponent {
+  num1: number = 1;
+  num2: number = 2;
+}
+```
+
 ## Examples
 
 Below there are some examples of use case.
@@ -85,6 +109,30 @@ import { defer, Observable, timer } from 'rxjs';
   selector: 'app-root',
   template: `
   <ng-container *ngLet="obs$ | async as time"> <!-- single subscription -->
+    <div>
+      1: {{ time }}
+    </div>
+    <div>
+      2: {{ time }}
+    </div>
+  </ng-container>
+  `,
+})
+export class AppComponent {
+  obs$: Observable<number> = defer(() => timer(3000, 1000));
+}
+```
+
+or with the alternative sintax:
+
+```ts
+import { Component } from '@angular/core';
+import { defer, Observable, timer } from 'rxjs';
+
+@Component({
+  selector: 'app-root',
+  template: `
+  <ng-container *ngLet="obs$ | async; let time"> <!-- single subscription -->
     <div>
       1: {{ time }}
     </div>
