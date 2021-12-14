@@ -53,12 +53,12 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   template: `
-  <ng-container *ngLet="(num1 + num2) as data">
+  <ng-container *ngLet="(num1 + num2) as total"> <!-- single computation -->
     <div>
-      1: {{data}} <!-- 3 -->
+      1: {{ total }} <!-- 3 -->
     </div>
     <div>
-      2: {{data}} <!-- 3 -->
+      2: {{ total }} <!-- 3 -->
     </div>
   </ng-container> 
   `,
@@ -84,12 +84,12 @@ import { defer, Observable, timer } from 'rxjs';
 @Component({
   selector: 'app-root',
   template: `
-  <ng-container *ngLet="obs$ | async as data">
+  <ng-container *ngLet="obs$ | async as time"> <!-- single subscription -->
     <div>
-      1: {{data}}
+      1: {{ time }}
     </div>
     <div>
-      2: {{data}}
+      2: {{ time }}
     </div>
   </ng-container>
   `,
