@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Observable, of } from 'rxjs';
 import { NgLetModule } from './ng-let.module';
 
-@Component({ template: '<div *ngLet="value as data">{{data}}</div>' })
+@Component({ template: '<div><ng-container *ngLet="value as data">{{data}}</ng-container><ng-container *ngLet="value; let data">{{data}}</ng-container></div>' })
 class TestSimpleComponent {
     value = 'test';
 }
@@ -29,7 +29,7 @@ describe('NgLet: simple', () => {
 
     it('test', () => {
         fixture.detectChanges();
-        expect(element.textContent).toBe('test');
+        expect(element.textContent).toBe('testtest');
     });
 });
 
