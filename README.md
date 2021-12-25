@@ -108,7 +108,7 @@ import { defer, Observable, timer } from 'rxjs';
 @Component({
   selector: 'app-root',
   template: `
-  <ng-container *ngLet="obs$ | async as time"> <!-- single subscription -->
+  <ng-container *ngLet="timer$ | async as time"> <!-- single subscription -->
     <div>
       1: {{ time }}
     </div>
@@ -119,7 +119,7 @@ import { defer, Observable, timer } from 'rxjs';
   `,
 })
 export class AppComponent {
-  obs$: Observable<number> = defer(() => timer(3000, 1000));
+  timer$: Observable<number> = defer(() => timer(3000, 1000));
 }
 ```
 
@@ -132,7 +132,7 @@ import { defer, Observable, timer } from 'rxjs';
 @Component({
   selector: 'app-root',
   template: `
-  <ng-container *ngLet="obs$ | async; let time"> <!-- single subscription -->
+  <ng-container *ngLet="timer$ | async; let time"> <!-- single subscription -->
     <div>
       1: {{ time }}
     </div>
@@ -143,7 +143,7 @@ import { defer, Observable, timer } from 'rxjs';
   `,
 })
 export class AppComponent {
-  obs$: Observable<number> = defer(() => timer(3000, 1000));
+  timer$: Observable<number> = defer(() => timer(3000, 1000));
 }
 ```
 
