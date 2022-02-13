@@ -14,6 +14,7 @@ See the [stackblitz demo](https://stackblitz.com/edit/demo-ng-let?file=src%2Fapp
 ✅ Observable support<br>
 ✅ Async pipe support<br>
 ✅ NgModel support<br>
+✅ Type casting<br>
 
 ## Get Started
 
@@ -69,7 +70,7 @@ export class AppComponent {
 }
 ```
 
-or with the alternative sintax:
+or with the implicit sintax:
 
 ```ts
 import { Component } from '@angular/core';
@@ -123,7 +124,7 @@ export class AppComponent {
 }
 ```
 
-or with the alternative sintax:
+or with the implicit sintax:
 
 ```ts
 import { Component } from '@angular/core';
