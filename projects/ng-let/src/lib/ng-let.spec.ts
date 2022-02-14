@@ -1,6 +1,7 @@
 import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Observable, of } from 'rxjs';
+import { NgLetDirective } from './ng-let.directive';
 import { NgLetModule } from './ng-let.module';
 
 @Component({ template: '<div><ng-container *ngLet="value as data">{{data}}</ng-container><ng-container *ngLet="value; let data">{{data}}</ng-container></div>' })
@@ -98,5 +99,11 @@ describe('NgLet: nested', () => {
 describe('NgLetModule', () => {
     it('should create NgLetModule', () => {
         expect(new NgLetModule()).toBeTruthy();
+    });
+});
+
+describe('NgLetDirective ivy', () => {
+    it('ngTemplateContextGuard', () => {
+        expect(NgLetDirective.ngTemplateContextGuard(null as any, null)).toBeTrue();
     });
 });
