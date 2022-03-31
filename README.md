@@ -5,7 +5,7 @@ Angular structural directive for sharing data as local variable into html compon
 ## Description
 
 Sometime there is a need to share data into component template as local variable. 
-This structural directive create local contex of variable that can be used into html template.
+This structural directive create local context of variable that can be used into html template.
 
 See the [stackblitz demo](https://stackblitz.com/edit/demo-ng-let?file=src%2Fapp%2Fapp.component.ts).
 
