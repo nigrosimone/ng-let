@@ -9,11 +9,11 @@ import { defer, Observable, timer } from 'rxjs';
 })
 export class AppComponent {
   obs$: Observable<number> = defer(() => timer(3000, 1000));
-  model = '';
+  model = 'test';
   object: {x: boolean, y: number, z: string, i: {test: string}}  = {
     x: true,
     y: 1,
-    z: 'test',
-    i: {test: 'foo'}
-  }
+    z: this.model,
+    i: {test: this.model}
+  };
 }
