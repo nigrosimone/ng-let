@@ -3,8 +3,6 @@ import { NgLetDirective } from './ng-let.directive';
 
 @NgModule({
   declarations: [NgLetDirective],
-  imports: [],
-  exports: [NgLetDirective],
-  providers: []
+  exports: [NgLetDirective]
 })
 export class NgLetModule { }

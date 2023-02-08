@@ -1,12 +1,41 @@
 import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 
 interface NgLetContext<T> {
+    /**
+     * using `ngrxLet` to enable `as` syntax: `*ngLet="foo as bar"`
+     */
     ngLet: T;
+    /**
+     * using `$implicit` to enable `let` syntax: `*ngLet="foo; let bar"`
+     */
     $implicit: T;
 }
 
+/**
+ * @ngModule NgLetModule
+ *
+ * @description
+ *
+ * The `*ngLet` directive it's a Angular structural directive for sharing data as local variable into html component template..
+ *
+ * @usageNotes
+ *
+ * ### Usage
+ *
+ * ```html
+ * <ng-container *ngLet="(num1 + num2); let total"> <!-- single computation -->
+ *    <div>
+ *       1: {{ total }}
+ *     </div>
+ *     <div>
+ *       2: {{ total }}
+ *     </div>
+ * </ng-container> 
+ * ```
+ *
+ * @publicApi
+ */
 @Directive({
-    // tslint:disable-next-line: directive-selector
     selector: '[ngLet]'
 })
 export class NgLetDirective<T> {
@@ -21,8 +50,8 @@ export class NgLetDirective<T> {
     set ngLet(value: T) {
         this.context.$implicit = this.context.ngLet = value;
         if (!this.hasView) {
-            this.viewContainer.createEmbeddedView(this.templateRef, this.context);
             this.hasView = true;
+            this.viewContainer.createEmbeddedView(this.templateRef, this.context);
         }
     }
 

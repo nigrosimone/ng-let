@@ -34,7 +34,7 @@ describe('NgLet: simple', () => {
     });
 });
 
-@Component({ template: '<div *ngLet="value | async as data">{{data}}</div>' })
+@Component({ template: '<div *ngLet="value | async; let data">{{data}}</div>' })
 class TestAsyncComponent {
     value: Observable<string> = of('test');
 }
