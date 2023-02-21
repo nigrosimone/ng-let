@@ -74,7 +74,7 @@ export class NgLetDirective<T> {
      * The presence of this method is a signal to the Ivy template type-check compiler that the
      * `NgLet` structural directive renders its template with a specific context type.
      */
-    static ngTemplateContextGuard<T>(dir: NgLetDirective<T>, ctx: any): ctx is NgLetContext<Exclude<T, false | 0 | '' | null | undefined>> {
+    static ngTemplateContextGuard<T>(dir: NgLetDirective<T>, ctx: any): ctx is NgLetContext<T> {
         return true;
     }
 }
