@@ -41,9 +41,8 @@ interface NgLetContext<T> {
 export class NgLetDirective<T> {
 
     private context: NgLetContext<T | null> = { ngLet: null, $implicit: null };
-    private hasView: boolean = false;
+    private hasView = false;
 
-    // eslint-disable-next-line no-unused-vars
     constructor(private viewContainer: ViewContainerRef, private templateRef: TemplateRef<NgLetContext<T>>) { }
 
     @Input()
