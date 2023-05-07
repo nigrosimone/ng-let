@@ -1,6 +1,6 @@
 {
   "name": "ng-let",
-  "version": "15.0.2",
+  "version": "16.0.0",
   "description": "Angular structural directive for sharing data as local variable into html component template.",
   "repository": {
     "type": "git",
@@ -16,8 +16,8 @@
   },
   "homepage": "https://github.com/nigrosimone/ng-let",
   "peerDependencies": {
-    "@angular/common": "^15.0.0",
-    "@angular/core": "^15.0.0"
+    "@angular/common": ">15.0.0",
+    "@angular/core": ">15.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.1"
