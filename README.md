@@ -148,6 +148,62 @@ export class AppComponent {
 }
 ```
 
+### Example: signal
+
+Example of use with signal, eg.:
+
+```ts
+import { Component, signal } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  template: `
+  <ng-container *ngLet="mySignal() as time"> <!-- single computation -->
+    <div>
+      1: {{ time }}
+    </div>
+    <div>
+      2: {{ time }}
+    </div>
+  </ng-container>
+  `,
+})
+export class AppComponent {
+  mySignal = signal(1);
+
+  constructor() {
+    setInterval(() => this.mySignal.update(value => value + 1), 1000)
+  }
+}
+```
+
+or with the implicit sintax:
+
+```ts
+import { Component, signal } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  template: `
+  <ng-container *ngLet="mySignal(); let time"> <!-- single computation -->
+    <div>
+      1: {{ time }}
+    </div>
+    <div>
+      2: {{ time }}
+    </div>
+  </ng-container>
+  `,
+})
+export class AppComponent {
+  mySignal = signal(1);
+
+  constructor() {
+    setInterval(() => this.mySignal.update(value => value + 1), 1000)
+  }
+}
+```
+
 ## Support
 
 This is an open-source project. Star this [repository](https://github.com/nigrosimone/ng-let), if you like it, or even [donate](https://www.paypal.com/paypalme/snwp). Thank you so much! 

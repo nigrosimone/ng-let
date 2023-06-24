@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { defer, Observable, timer } from 'rxjs';
 
 @Component({
@@ -10,10 +10,15 @@ import { defer, Observable, timer } from 'rxjs';
 export class AppComponent {
   obs$: Observable<number> = defer(() => timer(3000, 1000));
   model = 'test';
-  object: {x: boolean, y: number, z: string, i: {test: string}}  = {
+  asignal = signal(1);
+  object: { x: boolean, y: number, z: string, i: { test: string } } = {
     x: true,
     y: 1,
     z: this.model,
-    i: {test: this.model}
+    i: { test: this.model }
   };
+
+  constructor() {
+    setInterval(() => this.asignal.update(value => value + 1), 1000)
+  }
 }

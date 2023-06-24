@@ -67,3 +67,13 @@
     2: {{data| json }}
   </div>
 </ng-container>
+<h1>Signal</h1>
+{{asignal()}}
+<ng-container *ngLet="asignal(); let data">
+  <div>
+    1: {{data }}
+  </div>
+  <div>
+    2: {{data }}
+  </div>
+</ng-container>
