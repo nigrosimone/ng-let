@@ -70,7 +70,7 @@ export class AppComponent {
 }
 ```
 
-or with the implicit sintax:
+or with the implicit syntax:
 
 ```ts
 import { Component } from '@angular/core';
@@ -124,7 +124,7 @@ export class AppComponent {
 }
 ```
 
-or with the implicit sintax:
+or with the implicit syntax:
 
 ```ts
 import { Component } from '@angular/core';
@@ -177,7 +177,7 @@ export class AppComponent {
 }
 ```
 
-or with the implicit sintax:
+or with the implicit syntax:
 
 ```ts
 import { Component, signal } from '@angular/core';
