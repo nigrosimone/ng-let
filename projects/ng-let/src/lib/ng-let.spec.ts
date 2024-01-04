@@ -104,6 +104,7 @@ describe('NgLetModule', () => {
 
 describe('NgLetDirective ivy', () => {
     it('ngTemplateContextGuard', () => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         expect(NgLetDirective.ngTemplateContextGuard(null as any, null)).toBeTrue();
     });
 });
