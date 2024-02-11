@@ -2,7 +2,7 @@ import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 
 interface NgLetContext<T> {
     /**
-     * using `ngrxLet` to enable `as` syntax: `*ngLet="foo as bar"`
+     * using `ngLet` to enable `as` syntax: `*ngLet="foo as bar"`
      */
     ngLet: T;
     /**
