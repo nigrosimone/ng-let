@@ -24,7 +24,7 @@ See the [stackblitz demo](https://stackblitz.com/edit/demo-ng-let?file=src%2Fapp
 npm i ng-let
 ```
 
-*Step 2*: Import `NgLetModule` into your app module, eg.:
+*Step 2*: Import `NgLetModule` into your app module or imports of standalone component, eg.:
 
 ```ts
 import { BrowserModule } from '@angular/platform-browser';
