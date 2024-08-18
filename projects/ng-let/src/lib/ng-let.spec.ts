@@ -22,6 +22,18 @@ describe('NgLet', () => {
         expect(fixture.nativeElement.textContent).toContain('test,test');
     }));
 
+    it('should work in a template with no value', waitForAsync(() => {
+        @Component({
+            template: '<ng-container *ngLet>test</ng-container>',
+            standalone: true,
+            imports: [NgLetModule],
+        })
+        class TestComponent {}
+        const fixture = TestBed.createComponent(TestComponent);
+        fixture.detectChanges();
+        expect(fixture.nativeElement.textContent).toContain('test');
+    }));
+
     it('should work in a template with implicit syntax', waitForAsync(() => {
         @Component({
             template: '<ng-container *ngLet="value; let data">{{data}},{{data}}</ng-container>',
