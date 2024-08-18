@@ -46,6 +46,29 @@ export class NgLetDirective<T> {
         viewContainer.createEmbeddedView(templateRef, this.context)
     }
 
+    
+    /**
+     * @ngModule NgLetModule
+     *
+     * @description
+     *
+     * The `*ngLet` directive it's a Angular structural directive for sharing data as local variable into html component template..
+     *
+     * @usageNotes
+     *
+     * ### Usage
+     *
+     * ```html
+     * <ng-container *ngLet="(num1 + num2); let total"> <!-- single computation -->
+     *    <div>
+     *       1: {{ total }}
+     *     </div>
+     *     <div>
+     *       2: {{ total }}
+     *     </div>
+     * </ng-container> 
+     * ```
+     */
     @Input({ required: true })
     set ngLet(value: T) {
         this.context.$implicit = this.context.ngLet = value;
