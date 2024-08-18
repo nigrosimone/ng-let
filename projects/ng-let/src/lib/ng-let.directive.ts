@@ -51,7 +51,13 @@ export class NgLetDirective<T> {
         this.context.$implicit = this.context.ngLet = value;
     }
 
-    /** @internal */
+    /** 
+     * @internal 
+     * Directives that behave like *ngIf can declare that they want the same treatment by including a 
+     * static member marker that is a signal to the template compiler to treat them like *ngIf.
+     * 
+     * @see https://v17.angular.io/guide/aot-compiler#custom-ngif-like-directives
+     */
     public static ngLetUseIfTypeGuard: void;
 
     /**
@@ -61,6 +67,8 @@ export class NgLetDirective<T> {
      * when the `NgLet` structural directive renders its template, the type of the expression bound
      * to `NgLet` should be narrowed in some way. For `NgLet`, the binding expression itself is used to
      * narrow its type, which allows the strictNullChecks feature of TypeScript to work with `NgLet`.
+     * 
+     * @see https://angular.dev/guide/directives/structural-directives#typing-the-directives-context
      */
     static ngTemplateGuard_ngLet: 'binding';
 
