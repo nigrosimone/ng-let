@@ -46,7 +46,6 @@ export class NgLetDirective<T> {
         viewContainer.createEmbeddedView(templateRef, this.context)
     }
 
-    
     /**
      * @ngModule NgLetModule
      *
