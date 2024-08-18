@@ -1,110 +1,81 @@
-import { Component, DebugElement } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component } from '@angular/core';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 import { Observable, of } from 'rxjs';
 import { NgLetDirective } from './ng-let.directive';
 import { NgLetModule } from './ng-let.module';
+import { CommonModule } from '@angular/common';
 
-@Component({ template: '<div><ng-container *ngLet="value as data">{{data}}</ng-container><ng-container *ngLet="value; let data">{{data}}</ng-container></div>' })
-class TestSimpleComponent {
-    value = 'test';
-}
-describe('NgLet: simple', () => {
 
-    let fixture: ComponentFixture<TestSimpleComponent>;
-    let debugElement: DebugElement;
-    let element: HTMLElement;
+describe('NgLet', () => {
 
-    beforeEach(() => {
-        TestBed.configureTestingModule({
-            declarations: [TestSimpleComponent],
-            imports: [NgLetModule]
-        });
-        fixture = TestBed.createComponent(TestSimpleComponent);
-        debugElement = fixture.debugElement;
-        element = debugElement.nativeElement;
-    });
-
-    afterEach(() => {
-        document.body.removeChild(element);
-    });
-
-    it('test', () => {
+    it('should work in a template with as syntax', waitForAsync(() => {
+        @Component({
+            template: '<ng-container *ngLet="value as data">{{data}},{{data}}</ng-container>',
+            standalone: true,
+            imports: [NgLetModule],
+        })
+        class TestComponent {
+            public value = 'test';
+        }
+        const fixture = TestBed.createComponent(TestComponent);
         fixture.detectChanges();
-        expect(element.textContent).toBe('testtest');
-    });
-});
+        expect(fixture.nativeElement.textContent).toContain('test,test');
+    }));
 
-@Component({ template: '<div *ngLet="value | async; let data">{{data}}</div>' })
-class TestAsyncComponent {
-    value: Observable<string> = of('test');
-}
-describe('NgLet: async', () => {
-
-    let fixture: ComponentFixture<TestAsyncComponent>;
-    let debugElement: DebugElement;
-    let element: HTMLElement;
-
-    beforeEach(() => {
-        TestBed.configureTestingModule({
-            declarations: [TestAsyncComponent],
-            imports: [NgLetModule]
-        });
-        fixture = TestBed.createComponent(TestAsyncComponent);
-        debugElement = fixture.debugElement;
-        element = debugElement.nativeElement;
-    });
-
-    afterEach(() => {
-        document.body.removeChild(element);
-    });
-
-    it('test', () => {
+    it('should work in a template with implicit syntax', waitForAsync(() => {
+        @Component({
+            template: '<ng-container *ngLet="value; let data">{{data}},{{data}}</ng-container>',
+            standalone: true,
+            imports: [NgLetModule],
+        })
+        class TestComponent {
+            public value = 'test';
+        }
+        const fixture = TestBed.createComponent(TestComponent);
         fixture.detectChanges();
-        expect(element.textContent).toBe('test');
-    });
-});
+        expect(fixture.nativeElement.textContent).toContain('test,test');
+    }));
 
-// tslint:disable-next-line: max-line-length
-@Component({ template: '<div *ngLet="value as data"><ng-container *ngLet="nestedValue as nestedData">{{data}}-{{nestedData}}</ng-container></div>' })
-class TestNestedComponent {
-    value = 'test';
-    nestedValue = 'testNested';
-}
-describe('NgLet: nested', () => {
-
-    let fixture: ComponentFixture<TestNestedComponent>;
-    let debugElement: DebugElement;
-    let element: HTMLElement;
-
-    beforeEach(() => {
-        TestBed.configureTestingModule({
-            declarations: [TestNestedComponent],
-            imports: [NgLetModule]
-        });
-        fixture = TestBed.createComponent(TestNestedComponent);
-        debugElement = fixture.debugElement;
-        element = debugElement.nativeElement;
-    });
-
-    afterEach(() => {
-        document.body.removeChild(element);
-    });
-
-    it('test', () => {
+    it('should work in a template with async pipe', waitForAsync(() => {
+        @Component({
+            template: '<ng-container *ngLet="value | async; let data">{{data}},{{data}}</ng-container>',
+            standalone: true,
+            imports: [NgLetModule, CommonModule],
+        })
+        class TestComponent {
+            public value: Observable<string> = of('test');
+        }
+        const fixture = TestBed.createComponent(TestComponent);
         fixture.detectChanges();
-        expect(element.textContent).toBe('test-testNested');
-    });
-});
+        expect(fixture.nativeElement.textContent).toContain('test,test');
+    }));
 
-describe('NgLetModule', () => {
+    it('should work in a template with nested directive', waitForAsync(() => {
+        @Component({
+            template: `<ng-container *ngLet="parent; let parentData"
+        >{{ parentData }},<ng-container *ngLet="child; let childData">{{
+          child
+        }}</ng-container></ng-container
+      >`,
+            standalone: true,
+            imports: [NgLetModule],
+        })
+        class TestComponent {
+            public parent = 'parent';
+            public child = 'child';
+        }
+        const fixture = TestBed.createComponent(TestComponent);
+        fixture.detectChanges();
+        expect(fixture.nativeElement.textContent).toContain('parent,child');
+    }));
+
+    it('ngTemplateContextGuard should return true', () => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        expect(NgLetDirective.ngTemplateContextGuard(null as any, null)).toBeTrue();
+    });
+
     it('should create NgLetModule', () => {
         expect(new NgLetModule()).toBeTruthy();
     });
 });
 
-describe('NgLetDirective ivy', () => {
-    it('ngTemplateContextGuard', () => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        expect(NgLetDirective.ngTemplateContextGuard(null as any, null)).toBeTrue();
-    });
-});
