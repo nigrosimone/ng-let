@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, signal, WritableSignal } from '@angular/core';
 import { TestBed, waitForAsync } from '@angular/core/testing';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { NgLetDirective } from './ng-let.directive';
 import { NgLetModule } from './ng-let.module';
 import { CommonModule } from '@angular/common';
@@ -28,7 +28,7 @@ describe('NgLet', () => {
             standalone: true,
             imports: [NgLetModule],
         })
-        class TestComponent {}
+        class TestComponent { }
         const fixture = TestBed.createComponent(TestComponent);
         fixture.detectChanges();
         expect(fixture.nativeElement.textContent).toContain('test');
@@ -60,6 +60,55 @@ describe('NgLet', () => {
         const fixture = TestBed.createComponent(TestComponent);
         fixture.detectChanges();
         expect(fixture.nativeElement.textContent).toContain('test,test');
+    }));
+
+    it('should work in a template with async pipe and change', waitForAsync(() => {
+        @Component({
+            template: '<ng-container *ngLet="value | async; let data">{{data}},{{data}}</ng-container>',
+            standalone: true,
+            imports: [NgLetModule, CommonModule],
+        })
+        class TestComponent {
+            public subject = new BehaviorSubject('test')
+            public value: Observable<string> = this.subject.asObservable();
+        }
+        const fixture = TestBed.createComponent(TestComponent);
+        fixture.detectChanges();
+        expect(fixture.nativeElement.textContent).toContain('test,test');
+        (fixture.debugElement.componentInstance as TestComponent).subject.next('test2');
+        fixture.detectChanges();
+        expect(fixture.nativeElement.textContent).toContain('test2,test2');
+    }));
+
+    it('should work in a template with signal', waitForAsync(() => {
+        @Component({
+            template: '<ng-container *ngLet="value(); let data">{{data}},{{data}}</ng-container>',
+            standalone: true,
+            imports: [NgLetModule],
+        })
+        class TestComponent {
+            public value: WritableSignal<string> = signal('test');
+        }
+        const fixture = TestBed.createComponent(TestComponent);
+        fixture.detectChanges();
+        expect(fixture.nativeElement.textContent).toContain('test,test');
+    }));
+
+    it('should work in a template with signal and change', waitForAsync(() => {
+        @Component({
+            template: '<ng-container *ngLet="value(); let data">{{data}},{{data}}</ng-container>',
+            standalone: true,
+            imports: [NgLetModule],
+        })
+        class TestComponent {
+            public value: WritableSignal<string> = signal('test');
+        }
+        const fixture = TestBed.createComponent(TestComponent);
+        fixture.detectChanges();
+        expect(fixture.nativeElement.textContent).toContain('test,test');
+        (fixture.debugElement.componentInstance as TestComponent).value.set('test2');
+        fixture.detectChanges();
+        expect(fixture.nativeElement.textContent).toContain('test2,test2');
     }));
 
     it('should work in a template with nested directive', waitForAsync(() => {
