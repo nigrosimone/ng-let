@@ -43,7 +43,7 @@ export class NgLetDirective<T> {
     private context: NgLetContext<T | null> = { ngLet: null, $implicit: null };
 
     constructor(viewContainer: ViewContainerRef, templateRef: TemplateRef<NgLetContext<T>>) {
-        viewContainer.createEmbeddedView(templateRef, this.context)
+        viewContainer.createEmbeddedView(templateRef, this.context);
     }
 
     /**
