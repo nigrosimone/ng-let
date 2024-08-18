@@ -41,17 +41,14 @@ interface NgLetContext<T> {
 export class NgLetDirective<T> {
 
     private context: NgLetContext<T | null> = { ngLet: null, $implicit: null };
-    private hasView = false;
 
-    constructor(private viewContainer: ViewContainerRef, private templateRef: TemplateRef<NgLetContext<T>>) { }
+    constructor(viewContainer: ViewContainerRef, templateRef: TemplateRef<NgLetContext<T>>) {
+        viewContainer.createEmbeddedView(templateRef, this.context)
+    }
 
-    @Input()
+    @Input({ required: true })
     set ngLet(value: T) {
         this.context.$implicit = this.context.ngLet = value;
-        if (!this.hasView) {
-            this.hasView = true;
-            this.viewContainer.createEmbeddedView(this.templateRef, this.context);
-        }
     }
 
     /** @internal */
@@ -72,9 +69,10 @@ export class NgLetDirective<T> {
      *
      * The presence of this method is a signal to the Ivy template type-check compiler that the
      * `NgLet` structural directive renders its template with a specific context type.
+     * 
+     * @see https://angular.dev/guide/directives/structural-directives#typing-the-directives-context
      */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    static ngTemplateContextGuard<T>(dir: NgLetDirective<T>, ctx: any): ctx is NgLetContext<T> {
+    static ngTemplateContextGuard<T>(_dir: NgLetDirective<T>, _ctx: unknown): _ctx is NgLetContext<T> {
         return true;
     }
 }
