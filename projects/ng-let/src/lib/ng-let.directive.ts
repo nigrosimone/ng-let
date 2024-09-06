@@ -16,7 +16,7 @@ interface NgLetContext<T> {
  *
  * @description
  *
- * The `*ngLet` directive it's a Angular structural directive for sharing data as local variable into html component template..
+ * The `*ngLet` directive it's a Angular structural directive for sharing data as local variable into html component template.
  *
  * @usageNotes
  *
@@ -51,7 +51,7 @@ export class NgLetDirective<T> {
      *
      * @description
      *
-     * The `*ngLet` directive it's a Angular structural directive for sharing data as local variable into html component template..
+     * The `*ngLet` directive it's a Angular structural directive for sharing data as local variable into html component template.
      *
      * @usageNotes
      *
