@@ -12,8 +12,6 @@ interface NgLetContext<T> {
 }
 
 /**
- * @ngModule NgLetModule
- *
  * @description
  *
  * The `*ngLet` directive it's a Angular structural directive for sharing data as local variable into html component template.
@@ -36,7 +34,8 @@ interface NgLetContext<T> {
  * @publicApi
  */
 @Directive({
-    selector: '[ngLet]'
+    selector: '[ngLet]',
+    standalone: true
 })
 export class NgLetDirective<T> {
 
@@ -47,8 +46,6 @@ export class NgLetDirective<T> {
     }
 
     /**
-     * @ngModule NgLetModule
-     *
      * @description
      *
      * The `*ngLet` directive it's a Angular structural directive for sharing data as local variable into html component template.
@@ -106,3 +103,8 @@ export class NgLetDirective<T> {
         return true;
     }
 }
+
+/** 
+ * @deprecated import standalone NgLet
+ */
+export const NgLetModule = NgLetDirective;

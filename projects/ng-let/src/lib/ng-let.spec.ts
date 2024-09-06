@@ -1,14 +1,13 @@
 import { Component, signal, WritableSignal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { NgLetDirective } from './ng-let.directive';
-import { NgLetModule } from './ng-let.module';
 import { CommonModule } from '@angular/common';
+import { NgLetModule, NgLetDirective } from '../public-api';
 
 
 describe('NgLet', () => {
 
-    it('should work in a template with as syntax', () => {
+    it('should work with ngModule', () => {
         @Component({
             template: '<ng-container *ngLet="value as data">{{data}},{{data}}</ng-container>',
             standalone: true,
@@ -22,11 +21,25 @@ describe('NgLet', () => {
         expect(fixture.nativeElement.textContent).toContain('test,test');
     });
 
+    it('should work in a template with as syntax', () => {
+        @Component({
+            template: '<ng-container *ngLet="value as data">{{data}},{{data}}</ng-container>',
+            standalone: true,
+            imports: [NgLetDirective],
+        })
+        class TestComponent {
+            public value = 'test';
+        }
+        const fixture = TestBed.createComponent(TestComponent);
+        fixture.detectChanges();
+        expect(fixture.nativeElement.textContent).toContain('test,test');
+    });
+
     it('should work in a template with no value', () => {
         @Component({
             template: '<ng-container *ngLet>test</ng-container>',
             standalone: true,
-            imports: [NgLetModule],
+            imports: [NgLetDirective],
         })
         class TestComponent { }
         const fixture = TestBed.createComponent(TestComponent);
@@ -38,7 +51,7 @@ describe('NgLet', () => {
         @Component({
             template: '<ng-container *ngLet="value; let data">{{data}},{{data}}</ng-container>',
             standalone: true,
-            imports: [NgLetModule],
+            imports: [NgLetDirective],
         })
         class TestComponent {
             public value = 'test';
@@ -52,7 +65,7 @@ describe('NgLet', () => {
         @Component({
             template: '<ng-container *ngLet="value | async; let data">{{data}},{{data}}</ng-container>',
             standalone: true,
-            imports: [NgLetModule, CommonModule],
+            imports: [NgLetDirective, CommonModule],
         })
         class TestComponent {
             public value: Observable<string> = of('test');
@@ -66,7 +79,7 @@ describe('NgLet', () => {
         @Component({
             template: '<ng-container *ngLet="value | async; let data">{{data}},{{data}}</ng-container>',
             standalone: true,
-            imports: [NgLetModule, CommonModule],
+            imports: [NgLetDirective, CommonModule],
         })
         class TestComponent {
             public subject = new BehaviorSubject('test')
@@ -84,7 +97,7 @@ describe('NgLet', () => {
         @Component({
             template: '<ng-container *ngLet="value(); let data">{{data}},{{data}}</ng-container>',
             standalone: true,
-            imports: [NgLetModule],
+            imports: [NgLetDirective],
         })
         class TestComponent {
             public value: WritableSignal<string> = signal('test');
@@ -98,7 +111,7 @@ describe('NgLet', () => {
         @Component({
             template: '<ng-container *ngLet="value(); let data">{{data}},{{data}}</ng-container>',
             standalone: true,
-            imports: [NgLetModule],
+            imports: [NgLetDirective],
         })
         class TestComponent {
             public value: WritableSignal<string> = signal('test');
@@ -119,7 +132,7 @@ describe('NgLet', () => {
         }}</ng-container></ng-container
       >`,
             standalone: true,
-            imports: [NgLetModule],
+            imports: [NgLetDirective],
         })
         class TestComponent {
             public parent = 'parent';
@@ -133,10 +146,6 @@ describe('NgLet', () => {
     it('ngTemplateContextGuard should return true', () => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         expect(NgLetDirective.ngTemplateContextGuard(null as any, null)).toBeTrue();
-    });
-
-    it('should create NgLetModule', () => {
-        expect(new NgLetModule()).toBeTruthy();
     });
 });
 

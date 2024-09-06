@@ -24,32 +24,11 @@ See the [stackblitz demo](https://stackblitz.com/edit/demo-ng-let?file=src%2Fapp
 npm i ng-let
 ```
 
-*Step 2*: Import `NgLetModule` into your app module or imports of standalone component, eg.:
-
-```ts
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
-
-import { NgLetModule } from 'ng-let';
-
-@NgModule({
-  declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    NgLetModule,
-  ],
-  providers: [],
-  bootstrap: [AppComponent],
-  ],
-})
-export class AppModule { }
-```
-
-*Step 3*: usage, eg.:
+*Step *: usage, eg.:
 
 ```ts
 import { Component } from '@angular/core';
+import { NgLetDirective } from 'ng-let';
 
 @Component({
   selector: 'app-root',
@@ -63,6 +42,8 @@ import { Component } from '@angular/core';
     </div>
   </ng-container> 
   `,
+  standalone: true,
+  imports: [NgLetDirective]
 })
 export class AppComponent {
   num1: number = 1;
@@ -74,6 +55,7 @@ or with the implicit syntax:
 
 ```ts
 import { Component } from '@angular/core';
+import { NgLetDirective } from 'ng-let';
 
 @Component({
   selector: 'app-root',
@@ -87,6 +69,8 @@ import { Component } from '@angular/core';
     </div>
   </ng-container> 
   `,
+  standalone: true,
+  imports: [NgLetDirective]
 })
 export class AppComponent {
   num1: number = 1;
@@ -105,6 +89,7 @@ Example of use with observable, eg.:
 ```ts
 import { Component } from '@angular/core';
 import { defer, Observable, timer } from 'rxjs';
+import { NgLetDirective } from 'ng-let';
 
 @Component({
   selector: 'app-root',
@@ -118,6 +103,8 @@ import { defer, Observable, timer } from 'rxjs';
     </div>
   </ng-container>
   `,
+  standalone: true,
+  imports: [NgLetDirective]
 })
 export class AppComponent {
   timer$: Observable<number> = defer(() => timer(3000, 1000));
@@ -129,6 +116,7 @@ or with the implicit syntax:
 ```ts
 import { Component } from '@angular/core';
 import { defer, Observable, timer } from 'rxjs';
+import { NgLetDirective } from 'ng-let';
 
 @Component({
   selector: 'app-root',
@@ -142,6 +130,8 @@ import { defer, Observable, timer } from 'rxjs';
     </div>
   </ng-container>
   `,
+  standalone: true,
+  imports: [NgLetDirective]
 })
 export class AppComponent {
   timer$: Observable<number> = defer(() => timer(3000, 1000));
@@ -154,6 +144,7 @@ Example of use with signal, eg.:
 
 ```ts
 import { Component, signal } from '@angular/core';
+import { NgLetDirective } from 'ng-let';
 
 @Component({
   selector: 'app-root',
@@ -167,6 +158,8 @@ import { Component, signal } from '@angular/core';
     </div>
   </ng-container>
   `,
+  standalone: true,
+  imports: [NgLetDirective]
 })
 export class AppComponent {
   mySignal = signal(1);
@@ -181,6 +174,7 @@ or with the implicit syntax:
 
 ```ts
 import { Component, signal } from '@angular/core';
+import { NgLetDirective } from 'ng-let';
 
 @Component({
   selector: 'app-root',
@@ -194,6 +188,8 @@ import { Component, signal } from '@angular/core';
     </div>
   </ng-container>
   `,
+  standalone: true,
+  imports: [NgLetDirective]
 })
 export class AppComponent {
   mySignal = signal(1);
