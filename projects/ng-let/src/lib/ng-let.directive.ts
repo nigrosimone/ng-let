@@ -105,6 +105,6 @@ export class NgLetDirective<T> {
 }
 
 /** 
- * @deprecated import standalone NgLet
+ * @deprecated import the standalone NgLetDirective
  */
 export const NgLetModule = NgLetDirective;
