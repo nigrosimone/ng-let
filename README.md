@@ -42,7 +42,6 @@ import { NgLetDirective } from 'ng-let';
     </div>
   </ng-container> 
   `,
-  standalone: true,
   imports: [NgLetDirective]
 })
 export class AppComponent {
@@ -69,7 +68,6 @@ import { NgLetDirective } from 'ng-let';
     </div>
   </ng-container> 
   `,
-  standalone: true,
   imports: [NgLetDirective]
 })
 export class AppComponent {
@@ -103,7 +101,6 @@ import { NgLetDirective } from 'ng-let';
     </div>
   </ng-container>
   `,
-  standalone: true,
   imports: [NgLetDirective]
 })
 export class AppComponent {
@@ -130,7 +127,6 @@ import { NgLetDirective } from 'ng-let';
     </div>
   </ng-container>
   `,
-  standalone: true,
   imports: [NgLetDirective]
 })
 export class AppComponent {
@@ -158,7 +154,6 @@ import { NgLetDirective } from 'ng-let';
     </div>
   </ng-container>
   `,
-  standalone: true,
   imports: [NgLetDirective]
 })
 export class AppComponent {
@@ -188,7 +183,6 @@ import { NgLetDirective } from 'ng-let';
     </div>
   </ng-container>
   `,
-  standalone: true,
   imports: [NgLetDirective]
 })
 export class AppComponent {
