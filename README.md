@@ -18,13 +18,13 @@ See the [stackblitz demo](https://stackblitz.com/edit/demo-ng-let?file=src%2Fapp
 
 ## Get Started
 
-*Step 1*: install `ng-let`
+Install `ng-let`
 
 ```bash
 npm i ng-let
 ```
 
-*Step *: usage, eg.:
+Usage, eg.:
 
 ```ts
 import { Component } from '@angular/core';
