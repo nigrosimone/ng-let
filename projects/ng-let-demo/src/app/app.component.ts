@@ -6,6 +6,7 @@ import { defer, Observable, timer } from 'rxjs';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
+  standalone: false
 })
 export class AppComponent {
   timer$: Observable<number> = defer(() => timer(3000, 1000));

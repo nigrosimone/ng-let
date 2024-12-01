@@ -10,8 +10,7 @@ describe('NgLet', () => {
     it('should work with ngModule', () => {
         @Component({
             template: '<ng-container *ngLet="value as data">{{data}},{{data}}</ng-container>',
-            standalone: true,
-            imports: [NgLetModule],
+            imports: [NgLetModule]
         })
         class TestComponent {
             public value = 'test';
@@ -24,8 +23,7 @@ describe('NgLet', () => {
     it('should work in a template with as syntax', () => {
         @Component({
             template: '<ng-container *ngLet="value as data">{{data}},{{data}}</ng-container>',
-            standalone: true,
-            imports: [NgLetDirective],
+            imports: [NgLetDirective]
         })
         class TestComponent {
             public value = 'test';
@@ -38,8 +36,7 @@ describe('NgLet', () => {
     it('should work in a template with no value', () => {
         @Component({
             template: '<ng-container *ngLet>test</ng-container>',
-            standalone: true,
-            imports: [NgLetDirective],
+            imports: [NgLetDirective]
         })
         class TestComponent { }
         const fixture = TestBed.createComponent(TestComponent);
@@ -50,8 +47,7 @@ describe('NgLet', () => {
     it('should work in a template with implicit syntax', () => {
         @Component({
             template: '<ng-container *ngLet="value; let data">{{data}},{{data}}</ng-container>',
-            standalone: true,
-            imports: [NgLetDirective],
+            imports: [NgLetDirective]
         })
         class TestComponent {
             public value = 'test';
@@ -64,8 +60,7 @@ describe('NgLet', () => {
     it('should work in a template with async pipe', () => {
         @Component({
             template: '<ng-container *ngLet="value | async; let data">{{data}},{{data}}</ng-container>',
-            standalone: true,
-            imports: [NgLetDirective, CommonModule],
+            imports: [NgLetDirective, CommonModule]
         })
         class TestComponent {
             public value: Observable<string> = of('test');
@@ -78,8 +73,7 @@ describe('NgLet', () => {
     it('should work in a template with async pipe and change', () => {
         @Component({
             template: '<ng-container *ngLet="value | async; let data">{{data}},{{data}}</ng-container>',
-            standalone: true,
-            imports: [NgLetDirective, CommonModule],
+            imports: [NgLetDirective, CommonModule]
         })
         class TestComponent {
             public subject = new BehaviorSubject('test')
@@ -96,8 +90,7 @@ describe('NgLet', () => {
     it('should work in a template with signal', () => {
         @Component({
             template: '<ng-container *ngLet="value(); let data">{{data}},{{data}}</ng-container>',
-            standalone: true,
-            imports: [NgLetDirective],
+            imports: [NgLetDirective]
         })
         class TestComponent {
             public value: WritableSignal<string> = signal('test');
@@ -110,8 +103,7 @@ describe('NgLet', () => {
     it('should work in a template with signal and change', () => {
         @Component({
             template: '<ng-container *ngLet="value(); let data">{{data}},{{data}}</ng-container>',
-            standalone: true,
-            imports: [NgLetDirective],
+            imports: [NgLetDirective]
         })
         class TestComponent {
             public value: WritableSignal<string> = signal('test');
@@ -131,8 +123,7 @@ describe('NgLet', () => {
           child
         }}</ng-container></ng-container
       >`,
-            standalone: true,
-            imports: [NgLetDirective],
+            imports: [NgLetDirective]
         })
         class TestComponent {
             public parent = 'parent';
