@@ -1,6 +1,6 @@
 {
   "name": "ng-let",
-  "version": "19.0.1",
+  "version": "20.0.0",
   "description": "Angular structural directive for sharing data as local variable into html component template.",
   "repository": {
     "type": "git",
