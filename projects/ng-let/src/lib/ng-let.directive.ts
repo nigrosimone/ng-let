@@ -41,6 +41,7 @@ export class NgLetDirective<T> {
 
     private context: NgLetContext<T | null> = { ngLet: null, $implicit: null };
 
+    // eslint-disable-next-line @angular-eslint/prefer-inject
     constructor(viewContainer: ViewContainerRef, templateRef: TemplateRef<NgLetContext<T>>) {
         viewContainer.createEmbeddedView(templateRef, this.context);
     }

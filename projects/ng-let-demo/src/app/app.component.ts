@@ -1,4 +1,4 @@
-import { Component, computed, DestroyRef, model, Signal, signal } from '@angular/core';
+import { Component, computed, DestroyRef, inject, model, Signal, signal } from '@angular/core';
 import { defer, Observable, timer } from 'rxjs';
 
 @Component({
@@ -6,9 +6,11 @@ import { defer, Observable, timer } from 'rxjs';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
+  // eslint-disable-next-line @angular-eslint/prefer-standalone
   standalone: false
 })
 export class AppComponent {
+  destroyRef = inject(DestroyRef);
   timer$: Observable<number> = defer(() => timer(3000, 1000));
   model = model<string>('test');
   timerSig = signal(1);
@@ -18,9 +20,9 @@ export class AppComponent {
     z: this.model(),
   }));
 
-  constructor(destroyRef: DestroyRef) {
+  constructor() {
     const interval = setInterval(() => this.timerSig.update(value => value + 1), 1000);
-    destroyRef.onDestroy(() => {
+    this.destroyRef.onDestroy(() => {
       clearInterval(interval)
     });
   }
