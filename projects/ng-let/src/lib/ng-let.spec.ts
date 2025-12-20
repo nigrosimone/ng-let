@@ -1,8 +1,9 @@
 import { Component, signal, WritableSignal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { CommonModule } from '@angular/common';
+
 import { NgLetModule, NgLetDirective } from '../public-api';
+import { AsyncPipe } from '@angular/common';
 
 
 describe('NgLet', () => {
@@ -60,7 +61,7 @@ describe('NgLet', () => {
     it('should work in a template with async pipe', () => {
         @Component({
             template: '<ng-container *ngLet="value | async; let data">{{data}},{{data}}</ng-container>',
-            imports: [NgLetDirective, CommonModule]
+            imports: [NgLetDirective, AsyncPipe]
         })
         class TestComponent {
             public value: Observable<string> = of('test');
@@ -73,7 +74,7 @@ describe('NgLet', () => {
     it('should work in a template with async pipe and change', () => {
         @Component({
             template: '<ng-container *ngLet="value | async; let data">{{data}},{{data}}</ng-container>',
-            imports: [NgLetDirective, CommonModule]
+            imports: [NgLetDirective, AsyncPipe]
         })
         class TestComponent {
             public subject = new BehaviorSubject('test')
