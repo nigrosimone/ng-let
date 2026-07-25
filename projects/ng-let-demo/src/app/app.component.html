@@ -1,84 +1,46 @@
 <h1>Observable</h1>
 <ng-container *ngLet="timer$ | async as time">
-    <div>
-      1: {{time}}
-    </div>
-    <div>
-      2: {{time}}
-    </div>
+  <div>1: {{ time }}</div>
+  <div>2: {{ time }}</div>
 </ng-container>
 <ng-container *ngLet="timer$ | async; let time">
-  <div>
-    1: {{time}}
-  </div>
-  <div>
-    2: {{time}}
-  </div>
+  <div>1: {{ time }}</div>
+  <div>2: {{ time }}</div>
 </ng-container>
 <h1>ngModel</h1>
-<input type="text" [(ngModel)]="model"/>
+<input type="text" [(ngModel)]="model" />
 <ng-container *ngLet="model() as data">
-    <div>
-      1: {{data}}
-    </div>
-    <div>
-      2: {{data}}
-    </div>
+  <div>1: {{ data }}</div>
+  <div>2: {{ data }}</div>
 </ng-container>
 <ng-container *ngLet="model(); let i">
-  <div>
-    1: {{i}}
-  </div>
-  <div>
-    2: {{i}}
-  </div>
+  <div>1: {{ i }}</div>
+  <div>2: {{ i }}</div>
 </ng-container>
 <h1>Computed</h1>
 <ng-container *ngLet="model() === 'test' as data">
-    <div>
-      1: {{data}}
-    </div>
-    <div>
-      2: {{data}}
-    </div>
+  <div>1: {{ data }}</div>
+  <div>2: {{ data }}</div>
 </ng-container>
 <ng-container *ngLet="model() === 'test'; let data">
-  <div>
-    1: {{data}}
-  </div>
-  <div>
-    2: {{data}}
-  </div>
+  <div>1: {{ data }}</div>
+  <div>2: {{ data }}</div>
 </ng-container>
 <h1>Object</h1>
 <ng-container *ngLet="object() as data">
-    <div>
-      1: {{data | json}}
-    </div>
-    <div>
-      2: {{data | json}}
-    </div>
+  <div>1: {{ data | json }}</div>
+  <div>2: {{ data | json }}</div>
 </ng-container>
 <ng-container *ngLet="object(); let data">
-  <div>
-    1: {{data | json }}
-  </div>
-  <div>
-    2: {{data| json }}
-  </div>
+  <div>1: {{ data | json }}</div>
+  <div>2: {{ data | json }}</div>
 </ng-container>
 <h1>Signal</h1>
-{{timerSig()}}
+{{ timerSig() }}
 <ng-container *ngLet="timerSig(); let data">
-  <div>
-    1: {{data }}
-  </div>
-  <div>
-    2: {{data }}
-  </div>
+  <div>1: {{ data }}</div>
+  <div>2: {{ data }}</div>
 </ng-container>
-{{timerSig()}}
+{{ timerSig() }}
 <h1>No val</h1>
-<ng-container *ngLet>
-  aaaa
-</ng-container>
+<ng-container *ngLet> aaaa </ng-container>
