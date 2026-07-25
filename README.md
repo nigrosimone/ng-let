@@ -1,4 +1,4 @@
-# NgLet [![Build Status](https://app.travis-ci.com/nigrosimone/ng-let.svg?branch=main)](https://app.travis-ci.com/nigrosimone/ng-let) [![Coverage Status](https://coveralls.io/repos/github/nigrosimone/ng-let/badge.svg?branch=main)](https://coveralls.io/github/nigrosimone/ng-let?branch=main) [![NPM version](https://img.shields.io/npm/v/ng-let.svg)](https://www.npmjs.com/package/ng-let) [![Maintainability](https://api.codeclimate.com/v1/badges/de3eb5e33fa6f4359721/maintainability)](https://codeclimate.com/github/nigrosimone/ng-let/maintainability)
+# NgLet [![Build Status](https://github.com/nigrosimone/ng-let/actions/workflows/node.js.yml/badge.svg?branch=main)](https://github.com/nigrosimone/ng-let/actions/workflows/node.js.yml) [![NPM version](https://img.shields.io/npm/v/ng-let.svg)](https://www.npmjs.com/package/ng-let)
 
 Angular structural directive for sharing data as local variable into html component template.
 
@@ -7,7 +7,7 @@ Angular structural directive for sharing data as local variable into html compon
 Sometime there is a need to share data into component template as local variable. 
 This structural directive create local context of variable that can be used into html template.
 
-See the [stackblitz demo](https://stackblitz.com/edit/demo-ng-let?file=src%2Fapp%2Fapp.component.ts).
+See the [stackblitz demo](https://stackblitz.com/github/nigrosimone/ng-let/tree/main/examples/stackblitz), or its [sources](examples/stackblitz).
 
 ## Features
 
@@ -15,6 +15,11 @@ See the [stackblitz demo](https://stackblitz.com/edit/demo-ng-let?file=src%2Fapp
 ✅ Async pipe support<br>
 ✅ NgModel support<br>
 ✅ Type casting<br>
+✅ Renders falsy values<br>
+
+Unlike `*ngIf`, `*ngLet` never hides its content: `0`, `''`, `false`, `null`, `undefined` and `NaN`
+are all bound and rendered, so a template guarded by `*ngLet` shows up exactly once whatever the
+expression evaluates to.
 
 ## Get Started
 
