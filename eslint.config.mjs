@@ -1,67 +1,86 @@
-import { defineConfig, globalIgnores } from "eslint/config";
-import globals from "globals";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-import js from "@eslint/js";
-import { FlatCompat } from "@eslint/eslintrc";
+// eslint.config.mjs
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const compat = new FlatCompat({
-    baseDirectory: __dirname,
-    recommendedConfig: js.configs.recommended,
-    allConfig: js.configs.all
-});
+import eslint from '@eslint/js';
+import tseslint from 'typescript-eslint';
+import angular from 'angular-eslint';
+import prettier from 'eslint-config-prettier/flat';
 
-export default defineConfig([globalIgnores(["!**/*", "**/test.ts", "**/main.ts"]), {
+export default tseslint.config(
+  {
+    // `examples/` holds standalone apps with their own package.json and tsconfig:
+    // they are built on their own, not by this workspace.
+    ignores: ['dist/**', 'coverage/**', '.angular/**', 'out-tsc/**', 'examples/**'],
+  },
+  {
+    files: ['**/*.ts'],
+    extends: [
+      eslint.configs.recommended,
+      ...tseslint.configs.recommendedTypeChecked,
+      ...tseslint.configs.stylisticTypeChecked,
+      ...angular.configs.tsRecommended,
+    ],
     languageOptions: {
-        globals: {
-            ...globals.jest,
-            ...globals.browser,
-        },
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
     },
-}, {
-    files: ["**/*.ts"],
-
-    extends: compat.extends(
-        "eslint:recommended",
-        "plugin:@typescript-eslint/eslint-recommended",
-        "plugin:@typescript-eslint/recommended",
-        "plugin:@angular-eslint/recommended",
-        "plugin:@angular-eslint/template/process-inline-templates",
-    ),
-
-    languageOptions: {
-        ecmaVersion: 5,
-        sourceType: "script",
-
-        parserOptions: {
-            project: [
-                "projects/ng-let/tsconfig.lib.json",
-                "projects/ng-let/tsconfig.spec.json",
-                "projects/ng-let-demo/tsconfig.app.json",
-                "projects/ng-let-demo/tsconfig.spec.json",
-            ],
-
-            createDefaultProgram: true,
-        },
-    },
-
+    processor: angular.processInlineTemplates,
     rules: {
-        "@angular-eslint/directive-selector": ["error", {
-            type: "attribute",
-            prefix: "ng",
-            style: "camelCase",
-        }],
-
-        "@angular-eslint/component-selector": ["error", {
-            type: "element",
-            prefix: "ng",
-            style: "kebab-case",
-        }],
+      // a leading underscore marks a parameter kept only to satisfy a signature
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+        },
+      ],
     },
-}, {
-    files: ["**/*.html"],
-    extends: compat.extends("plugin:@angular-eslint/template/recommended"),
-    rules: {},
-}]);
+  },
+  {
+    files: ['projects/ng-let/**/*.ts'],
+    rules: {
+      '@angular-eslint/directive-selector': [
+        'error',
+        { type: 'attribute', prefix: 'ng', style: 'camelCase' },
+      ],
+      '@angular-eslint/component-selector': [
+        'error',
+        { type: 'element', prefix: 'ng', style: 'kebab-case' },
+      ],
+    },
+  },
+  {
+    files: ['projects/ng-let-demo/**/*.ts'],
+    rules: {
+      '@angular-eslint/directive-selector': [
+        'error',
+        { type: 'attribute', prefix: 'app', style: 'camelCase' },
+      ],
+      '@angular-eslint/component-selector': [
+        'error',
+        { type: 'element', prefix: 'app', style: 'kebab-case' },
+      ],
+    },
+  },
+  {
+    // Test components are declared inline and deliberately break the naming rules.
+    files: ['**/*.spec.ts'],
+    rules: {
+      '@angular-eslint/component-selector': 'off',
+      '@typescript-eslint/dot-notation': 'off',
+      '@typescript-eslint/no-empty-function': 'off',
+      '@typescript-eslint/no-extraneous-class': 'off',
+      // referencing a method without calling it is the point here: to spy on it,
+      // to assert on its type, or to `.bind()` it
+      '@typescript-eslint/unbound-method': 'off',
+    },
+  },
+  {
+    files: ['**/*.html'],
+    extends: [...angular.configs.templateRecommended],
+  },
+  // Must stay last: turns off every rule that conflicts with Prettier.
+  prettier,
+);
