@@ -21,6 +21,17 @@ Unlike `*ngIf`, `*ngLet` never hides its content: `0`, `''`, `false`, `null`, `u
 are all bound and rendered, so a template guarded by `*ngLet` shows up exactly once whatever the
 expression evaluates to.
 
+Because of that, `*ngLet` does not narrow the type of what you bind to it, and a nullable
+expression stays nullable inside the template:
+
+```html
+<!-- time is `number | null`: the template renders before the first value arrives -->
+<ng-container *ngLet="timer$ | async as time">{{ time?.toFixed(2) }}</ng-container>
+
+<!-- bind a non-nullable expression when you would rather not guard every use -->
+<ng-container *ngLet="(timer$ | async) ?? 0 as time">{{ time.toFixed(2) }}</ng-container>
+```
+
 ## Get Started
 
 Install `ng-let`

@@ -252,9 +252,11 @@ describe('NgLetDirective', () => {
       );
     });
 
-    it('declares the markers the template compiler looks for', () => {
-      expect('ngTemplateGuard_ngLet' in NgLetDirective).toBe(true);
-      expect('ngLetUseIfTypeGuard' in NgLetDirective).toBe(true);
+    it('declares no *ngIf-like narrowing marker', () => {
+      // Both of these tell the compiler the bound expression is truthy inside the
+      // template. *ngLet always renders, so neither may be declared.
+      expect('ngTemplateGuard_ngLet' in NgLetDirective).toBe(false);
+      expect('ngLetUseIfTypeGuard' in NgLetDirective).toBe(false);
     });
   });
 });

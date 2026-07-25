@@ -26,8 +26,12 @@ describe('type surface', () => {
     }
   });
 
-  it('declares the `binding` guard that narrows the bound expression', () => {
-    expectTypeOf(NgLetDirective.ngTemplateGuard_ngLet).toEqualTypeOf<'binding'>();
+  it('keeps a nullable binding nullable in the context', () => {
+    // *ngIf would hand the template `Exclude<T, null | undefined | false | 0 | ''>`
+    // here, because it only renders when the expression is truthy. *ngLet renders
+    // either way, so the context has to carry the type exactly as it was bound.
+    expectTypeOf<NgLetContext<string | null>['$implicit']>().toEqualTypeOf<string | null>();
+    expectTypeOf<NgLetContext<number | undefined>['ngLet']>().toEqualTypeOf<number | undefined>();
   });
 
   it('keeps the input contravariant on the directive type parameter', () => {

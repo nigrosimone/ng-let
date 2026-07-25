@@ -72,26 +72,17 @@ export class NgLetDirective<T> {
     this.context.$implicit = this.context.ngLet = value;
   }
 
-  /**
-   * @internal
-   * Directives that behave like *ngIf can declare that they want the same treatment by including a
-   * static member marker that is a signal to the template compiler to treat them like *ngIf.
+  /*
+   * `*ngLet` deliberately declares neither `ngTemplateGuard_ngLet: 'binding'` nor the legacy
+   * `ngLetUseIfTypeGuard` marker. Both tell the template type checker to narrow the bound
+   * expression the way `*ngIf` does — that is, to assume it is truthy inside the template. That
+   * assumption only holds for a directive that renders conditionally, and this one always renders:
+   * with the markers in place `<ng-container *ngLet="value">{{ value.length }}</ng-container>`
+   * compiled cleanly under `strictTemplates` and then threw at runtime whenever `value` was null.
    *
-   * @see https://v17.angular.io/guide/aot-compiler#custom-ngif-like-directives
+   * The alias is typed by `ngTemplateContextGuard` below, which keeps `T` exactly as it was bound,
+   * so a nullable expression stays nullable and the template has to say so with `?.` or `??`.
    */
-  public static ngLetUseIfTypeGuard: void;
-
-  /**
-   * Assert the correct type of the expression bound to the `NgLet` input within the template.
-   *
-   * The presence of this static field is a signal to the Ivy template type check compiler that
-   * when the `NgLet` structural directive renders its template, the type of the expression bound
-   * to `NgLet` should be narrowed in some way. For `NgLet`, the binding expression itself is used to
-   * narrow its type, which allows the strictNullChecks feature of TypeScript to work with `NgLet`.
-   *
-   * @see https://angular.dev/guide/directives/structural-directives#typing-the-directives-context
-   */
-  static ngTemplateGuard_ngLet: 'binding';
 
   /**
    * Asserts the correct type of the context for the template that `NgLet` will render.
