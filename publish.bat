@@ -1,12 +1,37 @@
 @echo off
-npm version patch && ^
-cd "%cd%\projects\ng-let" && ^
-npm version patch && ^
-cd "%cd%" && ^
-npm run build ng-let --prod && ^
-copy /y "%cd%\README.md" "%cd%\dist\ng-let\README.md" && ^
-copy /y "%cd%\LICENSE" "%cd%\dist\ng-let\LICENSE" && ^
-cd "%cd%\dist\ng-let" && ^
-npm publish --ignore-scripts && ^
-cd "%cd%"
+setlocal
+
+:: 1. Use %~dp0 to reliably get the directory where the .bat file lives
+set "ROOT_DIR=%~dp0"
+
+echo Checking npm authentication...
+call npm whoami >nul 2>&1
+if %errorlevel% neq 0 (
+    echo You are not logged in. Prompting for npm login...
+    call npm login || exit /b
+)
+
+echo Bumping root version...
+call npm version patch || exit /b
+
+echo Bumping library version...
+:: 2. Use pushd/popd for safe directory switching
+pushd "%ROOT_DIR%projects\ng-let" || exit /b
+call npm version patch || exit /b
+popd
+
+echo Building library...
+:: 3. Use 'call' for npm commands to prevent the script from exiting early
+call npm run build ng-let || exit /b
+
+echo Copying metadata files...
+copy /y "%ROOT_DIR%README.md" "%ROOT_DIR%dist\ng-let\README.md" > nul || exit /b
+copy /y "%ROOT_DIR%LICENSE" "%ROOT_DIR%dist\ng-let\LICENSE" > nul || exit /b
+
+echo Publishing library...
+pushd "%ROOT_DIR%dist\ng-let" || exit /b
+call npm publish --ignore-scripts || exit /b
+popd
+
+echo Publish complete!
 pause

@@ -46,3 +46,13 @@ testem.log
 .DS_Store
 Thumbs.db
 /projects/ng-let/coverage
+
+# release artifacts
+RELEASE_NOTES.md
+
+# stackblitz example
+/examples/*/node_modules
+/examples/*/dist
+/examples/*/out-tsc
+/examples/*/.angular
+/examples/*/package-lock.json
