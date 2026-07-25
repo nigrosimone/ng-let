@@ -1,4 +1,4 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
+/* To learn more about this file see: https://angular.dev/reference/configs/file-structure. */
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
@@ -8,8 +8,5 @@
     "inlineSources": true,
     "types": []
   },
-  "exclude": [
-    "src/test.ts",
-    "**/*.spec.ts"
-  ]
+  "exclude": ["**/*.spec.ts"]
 }

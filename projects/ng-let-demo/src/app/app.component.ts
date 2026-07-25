@@ -1,29 +1,26 @@
-import { Component, computed, DestroyRef, inject, model, Signal, signal } from '@angular/core';
-import { defer, Observable, timer } from 'rxjs';
+import { JsonPipe, AsyncPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, computed, model, Signal, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { interval, map, Observable, startWith } from 'rxjs';
+import { NgLetDirective } from 'ng-let';
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  // eslint-disable-next-line @angular-eslint/prefer-standalone
-  standalone: false
+  imports: [NgLetDirective, FormsModule, AsyncPipe, JsonPipe],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-  destroyRef = inject(DestroyRef);
-  timer$: Observable<number> = defer(() => timer(3000, 1000));
+  timer$: Observable<number> = interval(1000).pipe(
+    map((value) => value + 1),
+    startWith(0),
+  );
   model = model<string>('test');
   timerSig = signal(1);
-  object: Signal<{ x: boolean, y: number, z: string }> = computed(() => ({
+  object: Signal<{ x: boolean; y: number; z: string }> = computed(() => ({
     x: this.model() === 'test',
     y: this.timerSig(),
     z: this.model(),
   }));
-
-  constructor() {
-    const interval = setInterval(() => this.timerSig.update(value => value + 1), 1000);
-    this.destroyRef.onDestroy(() => {
-      clearInterval(interval)
-    });
-  }
 }
