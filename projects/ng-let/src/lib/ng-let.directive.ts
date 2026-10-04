@@ -72,18 +72,6 @@ export class NgLetDirective<T> {
     this.context.$implicit = this.context.ngLet = value;
   }
 
-  /*
-   * `*ngLet` deliberately declares neither `ngTemplateGuard_ngLet: 'binding'` nor the legacy
-   * `ngLetUseIfTypeGuard` marker. Both tell the template type checker to narrow the bound
-   * expression the way `*ngIf` does — that is, to assume it is truthy inside the template. That
-   * assumption only holds for a directive that renders conditionally, and this one always renders:
-   * with the markers in place `<ng-container *ngLet="value">{{ value.length }}</ng-container>`
-   * compiled cleanly under `strictTemplates` and then threw at runtime whenever `value` was null.
-   *
-   * The alias is typed by `ngTemplateContextGuard` below, which keeps `T` exactly as it was bound,
-   * so a nullable expression stays nullable and the template has to say so with `?.` or `??`.
-   */
-
   /**
    * Asserts the correct type of the context for the template that `NgLet` will render.
    *
